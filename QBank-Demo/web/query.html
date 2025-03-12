@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>查询全部试题</title>
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    .question_list_container {
+      width: 580px;
+      margin: 100px auto;
+      padding: 20px;
+      border-radius: 4px;
+      border: 1px solid #ebeef5;
+      background-color: #fff;
+      overflow: hidden;
+      color: #303133;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    }
+    .question_list_container th {
+      padding: 0 5px;
+    }
+
+    .question_item:hover {
+      background-color: pink;
+      cursor: pointer;
+    }
+    .question_item:hover>td {
+      color: white;
+    }
+    .question_item td {
+      text-align: center;
+      color: #333;
+      padding: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="question_list_container">
+    <table>
+      <thead>
+          <th>试题编号</th>
+          <th>试题题目</th>
+          <th>试题选项A</th>
+          <th>试题选项B</th>
+          <th>试题选项C</th>
+          <th>试题选项D</th>
+          <th>试题答案</th>
+      </thead>
+      <tbody id="J_question_body">
+      </tbody>
+    </table>
+  </div>  
+</body>
+<script type="text/tpl" id="J_tpl">
+  <tr class="question_item">
+    <td>{{question_id}}</td>
+    <td>{{question_desc}}</td>
+    <td>{{question_option_A}}</td>
+    <td>{{question_option_B}}</td>
+    <td>{{question_option_C}}</td>
+    <td>{{question_option_D}}</td>
+    <td>{{question_answer}}</td>
+  </tr>
+</script>
+
+<script type="text/javascript">
+  const oTplTemplate = document.getElementById('J_tpl').innerText;
+  const oQuestionList = document.getElementById('J_question_body');
+  const formatter = () =>  new RegExp(/{{(.*?)}}/, 'gim');
+  const tplToHtml = (tpl, rule, opt) => {
+    return tpl.replace(rule, (match, key) => {
+      return opt[key];
+    });
+  }
+  axios.get("/question_bank/question_list", {
+      headers: {
+          'content-type': 'application/json;utf-8',
+      }
+  }).then(res => {
+    let allQuestionFlat = '';
+    res.data.data.forEach(item => {
+        allQuestionFlat += tplToHtml(oTplTemplate, formatter(), {
+            question_id: item.question_id,
+            question_desc: item.question_desc,
+            question_option_A: item.question_option_A,
+            question_option_B: item.question_option_B,
+            question_option_C: item.question_option_C,
+            question_option_D: item.question_option_D,
+            question_answer: item.question_answer
+        });
+    })
+    oQuestionList.innerHTML = allQuestionFlat;
+  });
+</script>
+</html>
