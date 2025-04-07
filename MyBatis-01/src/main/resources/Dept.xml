@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="Dept">
+    <delete id="delete">
+        delete from dept where deptno = 100
+    </delete>
+
+    <insert id="insert">
+        insert into dept values(70, "IT哥们部门", "武汉")
+    </insert>
+
+    <update id="update">
+        update dept set deptno=100, dname="IT销售部门", loc="北京" where deptno = 60
+
+    </update>
+
+</mapper>

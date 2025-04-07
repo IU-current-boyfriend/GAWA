@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!-- 向MyBatis获取SQL日志服务, 其目的可以看到SQL语句的正确性 -->
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+
+    <!--  第二件事：为SQLSessionFactory内置数据库连接池，提供连接四要素  -->
+    <environments default="one">
+        <environment id="one">
+            <transactionManager type="JDBC"></transactionManager>
+            <!--  type="POOLED",四要素交给SQLSessionFactory的内置连接池使用         -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/demo_one" />
+                <property name="username" value="root" />
+                <property name="password" value="88888888" />
+            </dataSource>
+
+        </environment>
+    </environments>
+
+    <!-- 第三件事：位SqlSessionFactoryBuilder提供当前工程的SQL映射配置文件   -->
+    <mappers>
+        <mapper resource="Dept.xml" />
+<!--        <mapper resource="Emp.xml" />-->
+    </mappers>
+</configuration>
