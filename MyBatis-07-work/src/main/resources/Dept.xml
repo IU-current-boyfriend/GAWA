@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeptXml">
+
+<!--    <select id="sql_1"-->
+<!--            resultMap="oneToMany">-->
+<!--        select dept.deptno, dept.dname, emp.ename, emp.sal, salGrade.grade-->
+<!--        from dept-->
+<!--                 join emp-->
+<!--                 join salGrade-->
+<!--                      on dept.deptno = emp.deptno-->
+<!--                          and emp.sal between salGrade.loSal and salGrade.hiSal-->
+<!--        order by dept.deptno;-->
+<!--    </select>-->
+
+<!--    <resultMap id="oneToMany"-->
+<!--               type="cn.entity.DeptEntity">-->
+<!--        <result column="DEPTNO" property="deptNo" />-->
+<!--        <result column="DNAME" property="deptName" />-->
+
+<!--        <collection property="emp"-->
+<!--                     ofType="cn.entity.EmpEntity">-->
+<!--            <result column="ENAME" property="eName" />-->
+<!--            <result column="SAL" property="sal" />-->
+<!--            <result column="GRADE" property="grade" />-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+
+<!--  需求：查询各个部门信息以及部门下有的职员信息以及职员的工资级别
+    [一方表]: 部门表
+    [多方表]: 职员表
+ -->
+    <select id="sql_2"
+            resultMap="oneToMany">
+        select dept.DEPTNO, dept.DNAME, emp.ENAME, emp.SAL, salGrade.GRADE
+        from dept
+                 join emp
+                 join salGrade
+                      on dept.deptno = emp.deptno
+                          and emp.sal between salGrade.loSal and salGrade.hiSal
+        order by dept.deptno;
+    </select>
+
+    <resultMap id="oneToMany"
+               type="cn.entity.DeptEntity2">
+        <result column="DEPTNO" property="deptNo" />
+        <result column="DNAME" property="deptName" />
+        
+        <collection property="empList"
+                    ofType="cn.entity.EmpEntity2">
+            <result column="ENAME" property="eName" />
+            <result column="SAL" property="sal" />
+            <result column="GRADE" property="grade" />
+        </collection>
+    </resultMap>
+</mapper>

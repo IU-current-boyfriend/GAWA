@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeptXML">
+<!--需求：查询部门的个数
+    临时表的特征：【只有一行数据】【每一行数据只有一个字段】
+    resultType="int",通知TypeHandler,将当前的数据行内容放到一个int类型的Java对象中
+-->
+    <select id="sql_1"
+            resultType="int">
+        select count(*) from dept
+    </select>
+
+
+<!--需求：查询所有部门的名称
+    临时表的特征：【存在多行数据】【每行数据只有一个字段】
+    resultType="java.utils.String",通知TypeHandler,将每一行的数据存放到一个String类型的Java对象中
+-->
+    <select id="sql_2"
+            resultType="java.lang.String"
+    >
+        select dname from dept
+    </select>
+
+
+<!--需求：查询指定编号下部门信息
+    临时表的特征： 【存在一行数据】【每一行数据只有一个字段】
+    resultType="自定义实体类对象",通知TypeHandler
+    ,将每一行的数据存放到一个自定义实体类的Java对象中
+-->
+    <select id="sql_3"
+            parameterType="int"
+            resultType="com.linno.cn.entity.DeptEntity"
+    >
+       select * from dept where deptno=#{deptNo}
+
+    </select>
+
+
+<!--  需求:查询所有部门详情
+      临时表的特征：【多行数据】【多个字段】
+      resultType="自定义类对象",通知TypeHandler将每一行的数据存放到一个自定义实体类的Java对象中
+    -->
+
+    <select id="sql_4"
+            resultType="com.linno.cn.entity.DeptEntity"
+    >
+        select * from dept
+    </select>
+
+
+
+</mapper>

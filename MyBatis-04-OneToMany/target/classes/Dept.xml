@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeptXml">
+    <!--  需求： 查询部门10的所有员工信息  -->
+    <!--  一方表：部门表
+          多方表：员工表
+          某个部门下拥有某些员工
+      -->
+    <!--    <select id="sql_1"-->
+    <!--            resultMap="oneToMany"-->
+    <!--    >-->
+    <!--        select dept.*, emp.*-->
+    <!--        from dept join emp-->
+    <!--                       on dept.deptno = emp.deptno-->
+    <!--        where dept.deptno = 10-->
+
+    <!--    </select>-->
+
+    <!--    <resultMap id="oneToMany" type="cn.entity.DeptEntity">-->
+    <!--        &lt;!&ndash;   当前数据行哪些字段内容需要存放到对应的一方实体类对象     &ndash;&gt;-->
+    <!--        <result column="DEPTNO" property="deptNo" />-->
+    <!--        <result column="DNAME" property="dName" />-->
+    <!--        <result column="LOC" property="loc" />-->
+    <!--        <collection property="empList" ofType="cn.entity.EmpEntity">-->
+    <!--            <result column="EMPNO" property="empNo" />-->
+    <!--            <result column="ENAME" property="ename" />-->
+    <!--            <result column="JOB" property="job" />-->
+    <!--            <result column="MGR" property="mgr" />-->
+    <!--            <result column="HIREDATE" property="hireDate" />-->
+    <!--            <result column="SAL" property="sal" />-->
+    <!--            <result column="COMM" property="comm" />-->
+    <!--            <result column="DEPTNO" property="deptNo" />-->
+    <!--        </collection>-->
+    <!--    </resultMap>-->
+    <!--    -->
+
+    <!--    需求：查询所有部门的员工信息
+            一方表：【部门表】
+            多方表：【职员表】
+            某个部门下拥有某些员工
+
+    -->
+    <!--    <select id="sql_2"-->
+    <!--            resultMap="oneToMany"-->
+    <!--    >-->
+    <!--        select dept.*, emp.*-->
+    <!--        from dept-->
+    <!--                 join emp-->
+    <!--                      on dept.deptno = emp.deptno-->
+    <!--        order by dept.deptno asc-->
+    <!--    </select>-->
+
+    <!--    <resultMap id="oneToMany" type="cn.entity.DeptEntity">-->
+    <!--        &lt;!&ndash;   当前数据行的哪些字段,需要存放到对应的一方表对象中     &ndash;&gt;-->
+    <!--        <result column="DEPTNO" property="deptNo"/>-->
+    <!--        <result column="DNAME" property="dName"/>-->
+    <!--        <result column="LOC" property="loc"/>-->
+
+    <!--        <collection property="empList" ofType="cn.entity.EmpEntity">-->
+    <!--            <result column="EMPNO" property="empNo"/>-->
+    <!--            <result column="ENAME" property="ename"/>-->
+    <!--            <result column="JOB" property="job"/>-->
+    <!--            <result column="MGR" property="mgr"/>-->
+    <!--            <result column="HIREDATE" property="hireDate"/>-->
+    <!--            <result column="SAL" property="sal"/>-->
+    <!--            <result column="COMM" property="comm"/>-->
+    <!--            <result column="DEPTNO" property="deptNo"/>-->
+    <!--        </collection>-->
+
+    <!--    </resultMap>-->
+
+    <!--  需求：某个部门下拥有某个职员， 职员工资隶属于某个等级  -->
+    <select id="sql_1"
+            resultMap="oneToMany">
+        select dept.*, emp.*, salgrade.*
+        from dept
+                 join emp
+                 join salgrade
+                      on dept.deptno = emp.deptno and
+                         emp.sal between salgrade.losal and salgrade.hisal
+        order by dept.deptno
+    </select>
+
+    <resultMap id="oneToMany"
+               type="cn.entity.DeptEntity">
+        <result column="DEPTNO" property="deptNo"/>
+        <result column="DNAME" property="dName"/>
+        <result column="LOC" property="loc"/>
+
+        <collection property="empList"
+                    ofType="cn.entity.EmpEntity">
+            <result column="EMPNO" property="empNo"/>
+            <result column="ENAME" property="ename"/>
+            <result column="JOB" property="job"/>
+            <result column="MGR" property="mgr"/>
+            <result column="HIREDATE" property="hireDate"/>
+            <result column="SAL" property="sal"/>
+            <result column="COMM" property="comm"/>
+            <result column="DEPTNO" property="deptNo"/>
+
+            <association property="salGrade"
+                         javaType="cn.entity.SalGradeEntity">
+                <result column="GRADE" property="grade" />
+                <result column="HISAL" property="hiSal" />
+                <result column="LOSAL" property="loSal" />
+            </association>
+        </collection>
+
+    </resultMap>
+</mapper>

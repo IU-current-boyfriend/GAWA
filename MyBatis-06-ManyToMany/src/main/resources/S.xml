@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SXml">
+
+    <!--  需求：查询1号学员详细信息以及学习过课程及成绩
+      【一方表】：学生信息表
+      【一方表】：课程信息表
+      【多方表】：学生课程成绩信息表
+    -->
+
+    <select id="sql_1"
+            resultMap="ManyToMany">
+        select S.*, C.*, SC.*
+        from S
+                 join C
+                 join SC
+                      on S.SNO = SC.SNO and C.CNO = SC.CNO
+        where S.SNO = 1;
+
+    </select>
+
+    <resultMap id="ManyToMany"
+               type="com.linno.cn.entity.SEntity">
+        <result column="SNO" property="sNo" />
+        <result column="SNAME" property="sName" />
+        <collection property="cList"
+                    ofType="com.linno.cn.entity.CEntity">
+            <result column="CNO" property="cNo" />
+            <result column="CNAME" property="cName" />
+            <result column="CTEACHER" property="cTeacher" />
+            <result column="SCGRADE" property="scGrade" />
+        </collection>
+    </resultMap>
+
+</mapper>

@@ -39,7 +39,7 @@ public class TestOne {
     @Test
     public void testTwo() {
         SqlSession session = SqlSessionUtil.getSqlSession(true);
-        int affectRows = session.delete("delete", 100);
+        int affectRows = session.delete("delete", 1000);
         System.out.println("删除了" + affectRows + "行数据...");
     }
 

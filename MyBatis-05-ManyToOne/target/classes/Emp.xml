@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="EmpXML">
+<!--  需求：查询smith所属的部门信息
+      一方表：【部门表】
+      多方表：【职员表】
+      某个职员被某个部门所拥有
+  -->
+    <select id="sql_1"
+            resultMap="ManyToOne">
+        select emp.*, dept.*
+        from emp
+                 join dept
+                      on emp.deptno = dept.deptno
+        where emp.ename = 'SMITH';
+    </select>
+
+    <resultMap id="ManyToOne"
+               type="cn.entity.EmpEntity">
+<!--   当前数据行的字段在多方表实体类对象中所对应的属性     -->
+        <result column="EMPNO" property="empNo" />
+        <result column="ENAME" property="ename" />
+        <result column="JOB" property="job" />
+        <result column="SAL" property="sal" />
+        <result column="COMM" property="comm" />
+        <result column="MGR" property="mgr" />
+        <result column="HIREDATE" property="hireDate" />
+        <result column="DEPTNO" property="deptNo" />
+
+<!--   当前数据行的字段在一方表实体类对象中所对应的属性     -->
+        <association property="dept" javaType="cn.entity.DeptEntity">
+            <result column="DEPTNO" property="deptNo" />
+            <result column="DNAME" property="dName" />
+            <result column="LOC" property="loc" />
+        </association>
+
+    </resultMap>
+
+
+<!--  需求，查询薪资大于2000的员工部门信息
+      一方表：【部门表】
+      多方表：【职员表】
+      某个部门拥有薪资大于2000的所有员工
+ -->
+    <select id="sql_2"
+            resultMap="ManyToOne2">
+        select emp.*, dept.*
+        from emp join dept
+        on emp.deptno = dept.deptno
+        where emp.sal >= 2000
+        order by emp.deptno asc
+    </select>
+
+    <resultMap id="ManyToOne2"
+               type="cn.entity.EmpEntity">
+        <result column="EMPNO" property="empNo" />
+        <result column="ENAME" property="ename" />
+        <result column="JOB" property="job" />
+        <result column="SAL" property="sal" />
+        <result column="COMM" property="comm" />
+        <result column="MGR" property="mgr" />
+        <result column="HIREDATE" property="hireDate" />
+        <result column="DEPTNO" property="deptNo" />
+
+        <association property="dept"
+                     javaType="cn.entity.DeptEntity">
+            <result column="DEPTNO" property="deptNo" />
+            <result column="DNAME" property="dName" />
+            <result column="LOC" property="loc" />
+        </association>
+    </resultMap>
+
+</mapper>

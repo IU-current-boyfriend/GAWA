@@ -6,6 +6,13 @@
       <list>
         <option value="$PROJECT_DIR$/MyBatis-01/pom.xml" />
         <option value="$PROJECT_DIR$/MyBatis-02/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-03/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-04-OneToMany/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis05-ManyToOne/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-05-ManyToOne-2/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-05-ManyToOne/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-06-ManyToMany/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-07-work/pom.xml" />
       </list>
     </option>
   </component>

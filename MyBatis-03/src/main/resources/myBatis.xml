@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--基本配置-->
+<configuration>
+<!--    MyBatis服务    -->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+<!--    提供数据库连接池配置信息  -->
+    <environments default="one">
+        <environment id="one">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/MyBatis" />
+                <property name="username" value="root" />
+                <property name="password" value="88888888" />
+            </dataSource>
+        </environment>
+    </environments>
+
+<!--  SQL语句配置信息  -->
+    <mappers>
+        <mapper resource="Dept.xml" />
+<!--        <mapper resource="Emp.xml" />-->
+    </mappers>
+</configuration>
