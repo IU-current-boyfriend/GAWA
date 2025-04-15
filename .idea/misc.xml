@@ -14,6 +14,8 @@
         <option value="$PROJECT_DIR$/MyBatis-06-ManyToMany/pom.xml" />
         <option value="$PROJECT_DIR$/MyBatis-07-work/pom.xml" />
         <option value="$PROJECT_DIR$/MyBatis-08-DynamicSQL/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-09-DaoBasic/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-10-DaoProxy/pom.xml" />
       </list>
     </option>
   </component>

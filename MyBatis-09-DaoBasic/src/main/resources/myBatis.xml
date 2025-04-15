@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--基本配置-->
+<configuration>
+    <!--    MyBatis服务    -->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+
+    <!--  配置别名  -->
+    <typeAliases>
+        <!--  手动设置某个实体类的别名,其表现形式也是忽略英文大小写     -->
+        <!-- <typeAlias type="com.bjpowernode.entity.Dept" alias="pp"/> -->
+
+        <!--  com.bjpowernode.entity下的实体类对象,别名会以类名的形式表现,切    -->
+<!--        <package name="com.bjpowernode.entity" />-->
+        <package name="com.linno.cn.entity" />
+    </typeAliases>
+
+
+    <!--    提供数据库连接池配置信息  -->
+    <environments default="one">
+        <environment id="one">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/MyBatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="88888888"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <mappers>
+        <mapper resource="Dept.xml" />
+    </mappers>
+
+</configuration>

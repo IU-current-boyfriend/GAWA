@@ -6,7 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="MyBatis-09-DaoBasic" />
         <module name="MyBatis-01" />
+        <module name="MyBatis-10-DaoProxy" />
         <module name="MyBatis-02" />
         <module name="MyBatis-03" />
         <module name="MyBatis-08-DynamicSQL" />
