@@ -9,6 +9,7 @@
         <module name="MyBatis-01" />
         <module name="MyBatis-02" />
         <module name="MyBatis-03" />
+        <module name="MyBatis-08-DynamicSQL" />
         <module name="MyBatis-07-work" />
         <module name="MyBatis-04-OneToMany" />
         <module name="MyBatis-05-ManyToOne" />

@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/MyBatis-05-ManyToOne/pom.xml" />
         <option value="$PROJECT_DIR$/MyBatis-06-ManyToMany/pom.xml" />
         <option value="$PROJECT_DIR$/MyBatis-07-work/pom.xml" />
+        <option value="$PROJECT_DIR$/MyBatis-08-DynamicSQL/pom.xml" />
       </list>
     </option>
   </component>

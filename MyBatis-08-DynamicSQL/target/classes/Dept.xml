@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeptXML">
+    <!-- 需求1：
+            如果用户提供了部门编号，则根据部门编号定位查询
+            如果用户没有提供部门编号，则查询所有部门
+     -->
+    <update id="sql_1"
+            parameterType="map">
+        update S
+        <set>
+            <if test="SNO != null">
+                SNO=#{SNO},
+            </if>
+            <if test="SName != null">
+                SNAME=#{SName},
+            </if>
+        </set>
+        <where>
+            <if test="id != null">
+                SNO = #{id}
+            </if>
+        </where>
+    </update>
+
+</mapper>

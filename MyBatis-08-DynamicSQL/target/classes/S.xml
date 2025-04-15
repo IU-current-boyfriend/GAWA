@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SXml">
+    <!--  需求: 根据SNO，删除一组数据中所有的学生  -->
+
+    <delete id="sql_1">
+        delete from S_COPY where SNO in
+        <foreach collection="array"
+                 item="SNO"
+                 separator=","
+                 open="("
+                 close=")">
+            #{SNO}
+        </foreach>
+    </delete>
+
+
+    <!--  需求：批处理插入学生信息  -->
+
+    <insert id="sql_2" parameterType="list">
+        insert into S values
+         <foreach collection="list" item="SEntity" separator=",">
+            (#{SEntity.sNo}, #{SEntity.sName})
+         </foreach>
+    </insert>
+</mapper>
